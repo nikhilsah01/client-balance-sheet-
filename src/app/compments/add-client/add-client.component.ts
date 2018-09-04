@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from '../../models/Client';
 import { ClientService } from '../../services/client.service'; 
+import { SettingsService } from '../../services/settings.service'; 
 
 @Component({
   selector: 'app-add-client',
@@ -18,14 +19,16 @@ export class AddClientComponent implements OnInit {
 
   disableBalanceOnAdd: boolean = false;
 
-  constructor( private clientService: ClientService) { }
+  constructor( private clientService: ClientService, private settingsService: SettingsService) { }
 
   ngOnInit() {
+    this.disableBalanceOnAdd = this.settingsService.getSettings().disableBalanceOnAdd;
   }
 
   onSubmit({value, valid }: {value: Client , valid:boolean }){
 
     this.clientService.newClient(value);
+    
   }
 
 

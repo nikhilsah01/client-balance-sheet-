@@ -30,4 +30,13 @@ export class ClientDetailsComponent implements OnInit {
     });
   }
 
+  onDeleteClick(){
+    if(confirm("Are you sure to delete?")){
+      this.clientService.deleteClient(this.id);
+      this.router.navigate(['/']);
+    }
+  }
+
+
+
 }
